@@ -39,7 +39,7 @@ async function uploadFile() {
     formData.append("certificate", fileInput.files[0]);
 
     try {
-        const response = await fetch("http://localhost:5001/api/uploads", {
+        const response = await fetch("/api/uploads", {
             method: "POST",
             body: formData
         });
