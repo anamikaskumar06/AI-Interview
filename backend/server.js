@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
-
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const authRoutes = require("./routes/auth");
 const uploadRoutes = require("./routes/uploads");
 const adminRoutes = require("./routes/admin");
@@ -10,6 +11,14 @@ const adminRoutes = require("./routes/admin");
 const app = express();
 
 app.use(cors());
+app.use(helmet());
+
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+}));
+
+
 app.use(express.json());
 
 // open frontend without Live Server
